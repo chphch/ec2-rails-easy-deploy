@@ -15,9 +15,11 @@ done
 while read -p "Enter github username : " github_username &&  [ -z $github_username ] ; do
   echo "Github username shouldn't be empty"
 done
-while read -s -p "Enter github password : " github_password && [ -z $github_password ] ; do
+stty -echo
+while read -p "Enter github password : " github_password && [ -z $github_password ] ; do
   echo "Github password shouldn't be empty"
 done
+stty echo; echo
 while read -p "Enter deploy branch name : " deploy_branch && [ -z $deploy_branch ] ; do
   echo "Deploy branch name shouldn't be empty"
 done
