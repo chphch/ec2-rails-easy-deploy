@@ -70,7 +70,7 @@ bundle install --deployment --without development test
 
 # Set secret_key_base
 cd /var/www/$app_name/code
-sed -i 's/<%= ENV\["SECRET_KEY_BASE"\] %>/'$(bundle exec rake secret)/ config/secrets.yml
+sed -i 's/<%= ENV\["SECRET_KEY_BASE"\] %>/'"$(bundle exec rake secret)"'/' config/secrets.yml
 
 # Change authority of config files
 cd /var/www/$app_name/code
