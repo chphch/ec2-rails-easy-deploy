@@ -6,7 +6,10 @@ key_pair_name=$app_name
 instance_type=t2.micro
 image_id=ami-a414b9ca
 
-security_group_id=$(aws ec2 create-security-group --group-name $security_group_name --description "DESCRIPTION" --output text)
+secutiry_group_id="$(aws ec2 describe-security-groups --filters Name=group-name,Values=$security_group_name --query 'SecurityGroups[0].GroupId' --output text)"
+if [ "$secutiry_group_id" == 'None' ]; then
+  security_group_id=$(aws ec2 create-security-group --group-name $security_group_name --description "DESCRIPTION" --output text)
+fi
 aws ec2 authorize-security-group-ingress --group-name $security_group_name --protocol tcp --port 22 --cidr 0.0.0.0/0
 aws ec2 create-key-pair --key-name $key_pair_name --query 'KeyMaterial' --output text > $key_pair_name.pem
 chmod 600 $key_pair_name.pem
