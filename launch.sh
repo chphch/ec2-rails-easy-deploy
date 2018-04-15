@@ -26,4 +26,4 @@ while [ "$instance_status" != 'ok' ]; do
   sleep 1
 done
 ssh-keyscan $public_dns_name >> $HOME/.ssh/known_hosts
-ssh -i $key_pair_name.pem -t ubuntu@$public_dns_name 'touch test'
+ssh -i $key_pair_name.pem -t ubuntu@$public_dns_name 'sh -c "$(curl https://raw.girhubusercontent.com/chphch/ec2-rails-easy-deploy/master/deploy.sh)"'
