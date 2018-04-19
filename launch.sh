@@ -13,6 +13,7 @@ fi
 aws ec2 authorize-security-group-ingress --group-name $security_group_name --protocol tcp --port 22 --cidr 0.0.0.0/0
 if [ ! $key_pair_path ]; then
   key_pair_path=$app_name.pem
+  chmod 777 $key_pair_path
   aws ec2 create-key-pair --key-name $app_name --query 'KeyMaterial' --output text > $key_pair_path
 fi
 chmod 400 $key_pair_path
